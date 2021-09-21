@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import Webcam from "react-webcam";
 import "./App.css";
-import { Home } from "./components/HomeComponent";
+import Webcammodel from "./components/WebCam";
+import WebCam from "./components/WebCam";
 
 function App() {
 	const videoelement = useRef<any>(null);
@@ -8,7 +10,7 @@ function App() {
 	const [loading, Setloading] = useState<boolean>(false);
 	const [mediastream, Setmediastream] = useState<any>();
 	return (
-		<div className=" bg-indigo-700 text-white flex justify-center items-center font-serif text-lg">
+		<div className=" ">
 			{/* <video
 				ref={videoelement}
 				width="750"
@@ -29,7 +31,8 @@ function App() {
 			
 				<video width="750" height="500" autoPlay ref={capturelement}>
 				</video> */}
-			<Home />
+			{/* <Home /> */}
+			<Webcammodel />
 		</div>
 	);
 }
