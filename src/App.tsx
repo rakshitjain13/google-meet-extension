@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import Webcam from "react-webcam";
+
 import "./App.css";
 import Webcammodel from "./components/WebCam";
-import WebCam from "./components/WebCam";
+
 
 function App() {
-	const videoelement = useRef<any>(null);
-	const capturelement = useRef<any>(null);
-	const [loading, Setloading] = useState<boolean>(false);
-	const [mediastream, Setmediastream] = useState<any>();
+
 	return (
 		<div className=" ">
 			{/* <video
