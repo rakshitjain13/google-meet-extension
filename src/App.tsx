@@ -1,8 +1,10 @@
 
 import "./App.css";
 import Webcammodel from "./components/WebCam";
-
-
+import Collect from "./components/Collect";
+import TrainModel from "./components/TrainedModel";
+import {testfunction} from "./components/train";
+// testfunction();
 function App() {
 
 	return (
@@ -28,7 +30,9 @@ function App() {
 				<video width="750" height="500" autoPlay ref={capturelement}>
 				</video> */}
 			{/* <Home /> */}
-			<Webcammodel />
+			{/* <Webcammodel /> */}
+			 {/*<Collect />*/}
+			<TrainModel />
 		</div>
 	);
 }
