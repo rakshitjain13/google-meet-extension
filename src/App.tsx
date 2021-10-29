@@ -4,7 +4,7 @@ import Webcammodel from "./components/WebCam";
 import Collect from "./components/Collect";
 import TrainModel from "./components/TrainedModel";
 import {testfunction} from "./components/train";
-// testfunction();
+ //testfunction();
 function App() {
 
 	return (
@@ -31,7 +31,7 @@ function App() {
 				</video> */}
 			{/* <Home /> */}
 			{/* <Webcammodel /> */}
-			 {/*<Collect />*/}
+			{/*<Collect />*/} 
 			<TrainModel />
 		</div>
 	);
