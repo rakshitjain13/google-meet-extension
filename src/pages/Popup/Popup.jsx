@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
+const SpeechRecognition = webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+
 
 import "./tailwind.css";
 const sendMessageToContent = (message) => {
@@ -8,7 +12,7 @@ const sendMessageToContent = (message) => {
 		chrome.tabs.sendMessage(activeTab.id, message);
 	});
 };
-const registerListener = (setState, ) => {
+const registerListener = (setState,) => {
 	chrome.runtime.onMessage.addListener((msg, sender, callback) => {
 		console.log("Popup recieved msg:", msg, "from:", sender);
 		switch (msg.type) {
@@ -21,13 +25,16 @@ const registerListener = (setState, ) => {
 		}
 	});
 };
+
 const Popup = () => {
-	const [isLoaded,SetisLoaded]=useState(true);
+	const [isLoaded, SetisLoaded] = useState(false);
+	
 	useEffect(() => {
 		registerListener(SetisLoaded);
-		sendMessageToContent({type:"IS_LOADED"});
+		sendMessageToContent({ type: "IS_LOADED" });
 	}, [])
 	return (
+
 		<div className="bg-blue-500 p-2 w-64">
 			{isLoaded ? (
 				<div className="p-2 bg-blue-700 text-white  m-2">Loading</div>
@@ -36,6 +43,24 @@ const Popup = () => {
 					<div className="text-white text-base font-semibold ">
 						A Google Meet Extension
 					</div>
+					<div
+						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
+						onClick={() => sendMessageToContent({ type: "START_CLASSIFYING_VOICE" })}
+					>
+						Start Voice Classification
+					</div>
+					<div
+						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
+						onClick={() => sendMessageToContent({ type: "STOP_CLASSIFYING_VOICE" })}
+					>
+						Stop Voice Classification
+					</div>
+					<button onClick={toggleListen}>start</button>
+					
+					<div>
+						{Trans}
+						</div>
+					
 					<div
 						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
 						onClick={() => sendMessageToContent({ type: "START_CLASSIFYING" })}
@@ -48,6 +73,7 @@ const Popup = () => {
 					>
 						Stop
 					</div>
+
 					<div className="text-white">
 						<span className="text-white text-lg font-semibold">Instructions</span>
 						<div className="text-lg flex flex-row items-center font-semibold mt-1">
@@ -116,7 +142,8 @@ const Popup = () => {
 						</div>
 					</div>
 				</div>
-			)}
+			)
+			}
 		</div>
 	);
 };

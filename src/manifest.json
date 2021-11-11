@@ -4,6 +4,7 @@
 	"background": {
 		"page": "background.html"
 	},
+	"options_page": "options.html",
 	"browser_action": {
 		"default_popup": "popup.html",
 		"default_icon": "icon-34.png"
@@ -18,7 +19,7 @@
 			"css": ["content.styles.css"]
 		}
 	],
-	"permissions": ["activeTab"],
+	"permissions": ["activeTab","audioCapture"],
 	"web_accessible_resources": [
 		"content.styles.css",
 		"icon-128.png",
