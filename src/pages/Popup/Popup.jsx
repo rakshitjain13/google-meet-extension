@@ -1,10 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
-const SpeechRecognition = webkitSpeechRecognition;
-const recognition = new SpeechRecognition();
-
-
 
 import "./tailwind.css";
+import VoicetoText from "./VoicetoText";
 const sendMessageToContent = (message) => {
 	console.log("send msg to content:", message);
 	chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
@@ -12,7 +9,7 @@ const sendMessageToContent = (message) => {
 		chrome.tabs.sendMessage(activeTab.id, message);
 	});
 };
-const registerListener = (setState,) => {
+const registerListener = (setState) => {
 	chrome.runtime.onMessage.addListener((msg, sender, callback) => {
 		console.log("Popup recieved msg:", msg, "from:", sender);
 		switch (msg.type) {
@@ -34,7 +31,6 @@ const Popup = () => {
 		sendMessageToContent({ type: "IS_LOADED" });
 	}, [])
 	return (
-
 		<div className="bg-blue-500 p-2 w-64">
 			{isLoaded ? (
 				<div className="p-2 bg-blue-700 text-white  m-2">Loading</div>
@@ -45,37 +41,21 @@ const Popup = () => {
 					</div>
 					<div
 						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
-						onClick={() => sendMessageToContent({ type: "START_CLASSIFYING_VOICE" })}
-					>
-						Start Voice Classification
-					</div>
-					<div
-						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
-						onClick={() => sendMessageToContent({ type: "STOP_CLASSIFYING_VOICE" })}
-					>
-						Stop Voice Classification
-					</div>
-					<button onClick={toggleListen}>start</button>
-					
-					<div>
-						{Trans}
-						</div>
-					
-					<div
-						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
 						onClick={() => sendMessageToContent({ type: "START_CLASSIFYING" })}
 					>
-						Start
+						Start Model
 					</div>
 					<div
 						className="p-2 bg-blue-700 text-white cursor-pointer m-2"
 						onClick={() => sendMessageToContent({ type: "STOP_CLASSIFYING" })}
 					>
-						Stop
+						Stop Model
 					</div>
-
+					<VoicetoText />
 					<div className="text-white">
-						<span className="text-white text-lg font-semibold">Instructions</span>
+						<span className="text-white text-lg font-semibold">
+							Instructions
+						</span>
 						<div className="text-lg flex flex-row items-center font-semibold mt-1">
 							<div>Camera on : </div>
 							<img
@@ -142,8 +122,7 @@ const Popup = () => {
 						</div>
 					</div>
 				</div>
-			)
-			}
+			)}
 		</div>
 	);
 };
